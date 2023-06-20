@@ -18,11 +18,12 @@ void CellTableView::setColumns(int newColumns)
 
 void CellTableView::repaintTable(QVector<QPoint> blockedCells)
 {
+    //очищаем графическое представление
     clearPath();
     clearCells();
 
     int id = 0;
-    for (int row = 0; row < rows; ++row)
+    for (int row = 0; row < rows; ++row)  //заполняем графическое поле клетками
     {
         QVector<CellView*> tempRow;
         for (int col = 0; col < columns; ++col)
@@ -37,7 +38,7 @@ void CellTableView::repaintTable(QVector<QPoint> blockedCells)
         }
         cellsMatrix.push_back(tempRow);
     }
-    if(!blockedCells.isEmpty())
+    if(!blockedCells.isEmpty()) //отрисовываем заблокированные клетки
     {
         foreach(QPoint cell, blockedCells)
         {
@@ -74,7 +75,7 @@ void CellTableView::onPathFound(QVector<QPoint> path)
     clearPath();
 
     QPointF prevP = QPointF();
-    foreach(QPoint point, path)
+    foreach(QPoint point, path) //отрисовываем линии по центру клеток на пути от А до Б
     {
         int row = point.x();
         int col = point.y();

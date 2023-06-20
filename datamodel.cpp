@@ -24,7 +24,7 @@ bool DataModel::reconstructModel(int rows, int columns)
         cells.clear();
     }
 
-    for (int row = 0; row < rows; ++row) //заполняем структуру данных
+    for (int row = 0; row < rows; ++row) //заполняем матрицу клеток
     {
         QVector<CellModel*> tempRow;
         for (int col = 0; col < columns; ++col)
