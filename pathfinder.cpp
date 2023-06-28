@@ -2,11 +2,17 @@
 
 PathFinder::PathFinder(QObject *parent, const DataModel *model) : QObject(parent), dataModel(model)
 {
+    mutex = new QMutex();
+}
 
+PathFinder::~PathFinder()
+{
+    delete mutex;
 }
 
 void PathFinder::findPath()
 {
+    mutex->lock();
     const CellModel *beginCell = dataModel->getStartCell();
     const CellModel *endCell = dataModel->getEndCell();
 
@@ -55,6 +61,7 @@ void PathFinder::findPath()
          currentCell = previousCells.value(currentCell);
      }
     }
+    mutex->unlock();
     emit pathFound(pathCells);
 }
 

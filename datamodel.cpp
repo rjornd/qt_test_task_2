@@ -7,7 +7,6 @@ DataModel::DataModel(int rows, int columns): rows(rows), columns(columns)
 
 bool DataModel::reconstructModel(int rows, int columns)
 {
-    if (readonly) return false;
     this->rows = rows;
     this->columns = columns;
     pointA = QPoint(-1,-1);
@@ -52,7 +51,6 @@ bool DataModel::reconstructModel(int rows, int columns)
 
 bool DataModel::changeBlockedAtRowColumn(int row, int col)
 {
-    if (readonly) return false;
     if (QPoint(row,col) == pointA || QPoint(row,col) == pointB)
     {
         return false;
@@ -67,7 +65,6 @@ void DataModel::generateRandomBlockedCells()
     setAllCellsToUnlocked();
     qsrand(QDateTime::currentMSecsSinceEpoch());
 
-    if (readonly) return;
     foreach(auto row, cells)
     {
         foreach(CellModel * cell, row)
@@ -93,10 +90,6 @@ int DataModel::getColumns() const
     return columns;
 }
 
-void DataModel::setReadonly(bool newReadonly)
-{
-    readonly = newReadonly;
-}
 
 QPoint DataModel::getPointA() const
 {
@@ -105,7 +98,6 @@ QPoint DataModel::getPointA() const
 
 void DataModel::setPointA(QPoint newPointA)
 {
-    if (readonly) return;
     pointA = newPointA;
 }
 
@@ -116,7 +108,6 @@ QPoint DataModel::getPointB() const
 
 void DataModel::setPointB(QPoint newPointB)
 {
-    if (readonly) return;
     pointB = newPointB;
 }
 

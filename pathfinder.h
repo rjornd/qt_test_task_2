@@ -6,6 +6,7 @@
 #include <QHash>
 #include <QVector>
 #include <QList>
+#include <QMutex>
 #include "datamodel.h"
 #include "cellmodel.h"
 class PathFinder : public QObject
@@ -13,9 +14,10 @@ class PathFinder : public QObject
     Q_OBJECT
 public:
     explicit PathFinder(QObject *parent = nullptr, const DataModel *model = nullptr);
+    ~PathFinder();
 private:
     const DataModel * dataModel;
-    bool taskReady = true;
+    QMutex* mutex;
 public slots:
     void findPath();
 signals:

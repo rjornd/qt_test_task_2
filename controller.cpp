@@ -45,7 +45,6 @@ void Controller::onBlockedCellSelected(int row, int col)
     emit blockedCellChanged(row, col);
     if (state == State::CalculatedPath) //персчитываем результат при блокировке новой клетки
     {
-        model->setReadonly(true);
         emit startPathFinder(model);
     }
 }
@@ -63,7 +62,6 @@ void Controller::onPointCellSelected(int row, int col)
         model->setPointB(QPoint(row,col));
         state = State::CalculatedPath;
         emit pointBApplied(row, col);
-        model->setReadonly(true);
         emit startPathFinder(model);
     }
     else if (state == State::CalculatedPath)
@@ -77,6 +75,5 @@ void Controller::onPointCellSelected(int row, int col)
 
 void Controller::onPathFound(const QVector<QPoint>& pathCells)
 {
-    model->setReadonly(false);
     emit pathFound(pathCells);
 }

@@ -16,7 +16,6 @@ public:
     void generateRandomBlockedCells();
     int getRows() const;
     int getColumns() const;
-    void setReadonly(bool newReadonly);
     void setPointA(QPoint newPointA);
     QPoint getPointA() const;
     void setPointB(QPoint newPointB);
@@ -35,7 +34,6 @@ private:
     int columns;
     QPoint pointA = QPoint(0,0);
     QPoint pointB = QPoint(0,0);
-    bool readonly = false;
 };
 
 #endif // DATAMODEL_H
